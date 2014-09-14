@@ -205,9 +205,14 @@ EOF
           :fore_color => status_str[plugin[:status]][:color]
         }
       else
+        author = if plugin[:spec]["author"].instance_of?(Array)
+            plugin[:spec]["author"].join(",").to_s
+          else
+            plugin[:spec]["author"].to_s
+        end
         {
           :status => status_str[plugin[:status]][:str],
-          :author => plugin[:spec]["author"],
+          :author => author,
           :name => plugin[:spec]["slug"],
           :description => plugin[:spec]["description"],
           :info => plugin,
